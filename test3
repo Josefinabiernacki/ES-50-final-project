@@ -1,2 +1,72 @@
-int a = 1
-int b = 2
+//Define pressure sensors and vibration motors
+
+#include <VibrationMotor.h> //Includes vibtration motor library
+
+Servo finger1, finger2, finger3, finger4, finger5;
+
+int motorPin1 = 5;
+int motorPin2 = 6;
+int motorPin3 = 9;
+int motorPin4 = 10;
+int motorPin5 = 3;
+
+int pressurePin1 = A0;
+int pressurePin2 = A1;
+int pressurePin3 = A2;
+int pressurePin4 = A3;
+int pressurePin5 = A4;
+
+void setup()
+{
+  // Attach the fingers to their respective pins
+  finger1.attach(motorPin1);
+  finger2.attach(motorPin2);
+  finger3.attach(motorPin3);
+  finger4.attach(motorPin4);
+  finger5.attach(motorPin5);
+  
+  // Set vibration motor pins to output
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
+  pinMode(motorPin3, OUTPUT);
+  pinMode(motorPin4, OUTPUT);
+  pinMode(motorPin5, OUTPUT);
+  
+  // Set each flex sensor pins to input
+  pinMode(pressurePin1, INPUT);
+  pinMode(pressurePin2, INPUT);
+  pinMode(pressurePin3, INPUT);
+  pinMode(pressurePin4, INPUT);
+  pinMode(pressurePin5, INPUT);
+  
+  
+}
+
+void loop()
+{
+  //Defines analog input variables
+  int pressure1 = analogRead(pressurePin1);
+  int pressure2 = analogRead(pressurePin2);
+  int pressure3 = analogRead(pressurePin3);
+  int pressure4 = analogRead(pressurePin4);
+  int pressure5 = analogRead(pressurePin5);
+  
+  // 
+  int pos1 = map(flex1, 400, 700, 0, 180);
+  pos1 = constrain(pos1, 0, 180);
+  int pos2 = map(flex2, 400, 700, 0, 180);
+  pos2 = constrain(pos2, 0, 180);
+  int pos3 = map(flex3, 400, 700, 0, 180);
+  pos3 = constrain(pos3, 0, 180);
+  int pos4 = map(flex4, 480, 640, 0, 180);
+  pos4 = constrain(pos4, 0, 180);
+  int pos5 = map(flex5, 400, 700, 0, 180);
+  pos5 = constrain(pos5, 0, 180);
+  
+  // CHANGE Tell vibration motors to vibrate by a specific 
+  finger1.write(pos1);
+  finger2.write(pos2);
+  finger3.write(pos3);
+  finger4.write(pos4);
+  finger5.write(pos5);
+}
