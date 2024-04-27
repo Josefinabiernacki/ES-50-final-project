@@ -1,6 +1,6 @@
 //Define pressure sensors and vibration motors
 
-#include <VibrationMotor.h> //Includes vibtration motor library
+#include <Arduino.h> <VibrationMotor.h>
 
 Servo finger1, finger2, finger3, finger4, finger5;
 
@@ -39,34 +39,31 @@ void setup()
   pinMode(pressurePin4, INPUT);
   pinMode(pressurePin5, INPUT);
   
-  
+  // Start serial communication
+  Serial.begin(9600);  
 }
 
 void loop()
 {
-  //Defines analog input variables
+  // Defines analog input variables
   int pressure1 = analogRead(pressurePin1);
   int pressure2 = analogRead(pressurePin2);
   int pressure3 = analogRead(pressurePin3);
   int pressure4 = analogRead(pressurePin4);
   int pressure5 = analogRead(pressurePin5);
   
-  // 
-  int pos1 = map(flex1, 400, 700, 0, 180);
-  pos1 = constrain(pos1, 0, 180);
-  int pos2 = map(flex2, 400, 700, 0, 180);
-  pos2 = constrain(pos2, 0, 180);
-  int pos3 = map(flex3, 400, 700, 0, 180);
-  pos3 = constrain(pos3, 0, 180);
-  int pos4 = map(flex4, 480, 640, 0, 180);
-  pos4 = constrain(pos4, 0, 180);
-  int pos5 = map(flex5, 400, 700, 0, 180);
-  pos5 = constrain(pos5, 0, 180);
-  
-  // CHANGE Tell vibration motors to vibrate by a specific 
-  finger1.write(pos1);
-  finger2.write(pos2);
-  finger3.write(pos3);
-  finger4.write(pos4);
-  finger5.write(pos5);
+  // Pulse Width Modulation
+  int pwmValue1 = map(pressure1, 0, 1023, 0, 255);
+  int pwmValue2 = map(pressure2, 0, 1023, 0, 255);
+  int pwmValue3 = map(pressure3, 0, 1023, 0, 255);
+  int pwmValue4 = map(pressure4, 0, 1023, 0, 255);
+  int pwmValue5 = map(pressure5, 0, 1023, 0, 255);
+
+  // Control motors based on mapped values
+  analogWrite(motorPin1, pwmValue1);
+  analogWrite(motorPin2, pwmValue2);
+  analogWrite(motorPin3, pwmValue3);
+  analogWrite(motorPin4, pwmValue4);
+  analogWrite(motorPin5, pwmValue5);
+
 }
