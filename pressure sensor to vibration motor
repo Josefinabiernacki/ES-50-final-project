@@ -1,8 +1,6 @@
 //Define pressure sensors and vibration motors
 
-#include <Arduino.h> <VibrationMotor.h>
-
-Servo finger1, finger2, finger3, finger4, finger5;
+#include <Arduino.h>
 
 int motorPin1 = 5;
 int motorPin2 = 6;
@@ -17,14 +15,7 @@ int pressurePin4 = A3;
 int pressurePin5 = A4;
 
 void setup()
-{
-  // Attach the fingers to their respective pins
-  finger1.attach(motorPin1);
-  finger2.attach(motorPin2);
-  finger3.attach(motorPin3);
-  finger4.attach(motorPin4);
-  finger5.attach(motorPin5);
-  
+{  
   // Set vibration motor pins to output
   pinMode(motorPin1, OUTPUT);
   pinMode(motorPin2, OUTPUT);
